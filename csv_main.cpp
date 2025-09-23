@@ -12,7 +12,7 @@ void find(string serial);
 
 int main(){
 	string serial;
-	cout << "Input serial: " << endl;
+	cout << "Input Serial Number to Search For: " << endl;
 	cin >> serial;
 	find(serial);
 	return 0;
@@ -29,27 +29,37 @@ void find(string serial){
 					cerr << "Unable to open file, exiting." << endl;
 				}
 				string line;
+				int row = 0;
 				while(getline(file,line)){
-					istringstream iss(line);
+					row++;
+					if(row < 11) continue;
+					istringstream ss(line);
 					string field;
-					getline(iss,field,',');
-					getline(iss,field,',');
-					getline(iss,field,',');
-					if(field == serial){
-						instances.push_back(entry.path().string());
+					int col = 0;
+					while(getline(ss,field,',')){
+						col++;
+						if(col==6){
+							if(field == serial){
+								instances.push_back(entry.path().string());
+							}
+							break;
+						}
 					}
 				}
 			}
 		}
 		if(instances.size() > 0){
-			cout << "Serial found in " << instances.size() << " surplus sheets: " << endl;
+			cout << endl;
+			cout << "Serial Number found in " << instances.size() << " Surplus sheet(s): " << endl;
 			for(int i = 0; i < instances.size(); i++){
 				cout << instances[i] << endl;
 			}
 		} else {
-			cout << "Serial not found in surplus sheets." << endl;
+			cout << endl;
+			cout << "Serial Number not found in Surplus sheets." << endl;
 		}
 	} catch (const filesystem::filesystem_error& e){
+		cout << endl;
 		cerr << "Error accessing directory: " << e.what() << endl;
 	}
 }
