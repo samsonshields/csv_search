@@ -19,13 +19,13 @@ int main(){
 }
 
 void find(string serial){
-	string path = "/Personal/";
+	string path = ".";
 	vector<string> instances;
 	try {
 		for(const auto& entry : filesystem::directory_iterator(path)){
 			if(entry.is_regular_file() && entry.path().extension() == ".csv"){
-				ifstream file(entry.path().filename());
-				if(!file.is_open){
+				ifstream file(entry.path());
+				if(!file.is_open()){
 					cerr << "Unable to open file, exiting." << endl;
 				}
 				string line;
@@ -36,22 +36,20 @@ void find(string serial){
 					getline(iss,field,',');
 					getline(iss,field,',');
 					if(field == serial){
-						instances.push_back(file);
+						instances.push_back(entry.path().string());
 					}
 				}
-			} else {
-				cout << "No csv files found, exiting." << endl;
 			}
 		}
 		if(instances.size() > 0){
-			cout << "Serial found in " << instances.size() << " other surplus sheets: " << endl;
+			cout << "Serial found in " << instances.size() << " surplus sheets: " << endl;
 			for(int i = 0; i < instances.size(); i++){
 				cout << instances[i] << endl;
 			}
 		} else {
-			cout << "Serial not found in other surplus sheets." << endl;
+			cout << "Serial not found in surplus sheets." << endl;
 		}
 	} catch (const filesystem::filesystem_error& e){
-		cerr << "Error accessing this directory: " << e.what() << endl;
+		cerr << "Error accessing directory: " << e.what() << endl;
 	}
 }
