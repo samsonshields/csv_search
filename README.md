@@ -1,4 +1,4 @@
-In this repo is an executable which searches through all current and previous surplus sheets and finds duplicate serial numbers, giving you the amount of duplicates and which sheets it appears in
+In this repo is an executable that searches through all current and previous surplus sheets, finds duplicate serial numbers, and gives you both the amount of duplicates and which sheets it appears in
 
 It is compiled from a cpp file I wrote, alongside a python script I had ChatGPT make to convert all surplus sheets to csv for standardization and usability across environments
 
