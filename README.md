@@ -1,10 +1,8 @@
-In this repo is an executable that searches through all current and previous surplus sheets, finds duplicate serial numbers, and gives you both the amount of duplicates and which sheets it appears in
-
-It is compiled from a cpp file I wrote, alongside a python script I had ChatGPT make to convert all surplus sheets to csv for standardization and usability across environments
+In this repo is an executable that searches through excel sheets based on row parameter, finds duplicates, and gives you both the amount of duplicates and which sheets they appear in
 
 Both the Python Script and Executable pull from current working directory
 
-To convert surplus excel sheets to csv files, run the python script in the same directory as your excel sheets. It will, if not already existing, create a folder named "csv_out" with all of your newly converted .csv files
+To convert excel sheets to csv files, run the python script in the same directory as your excel sheets. It will, if one does not already exit, create a folder named "csv_out" with all of your newly converted .csv files
 
 Move the search executable to csv_out, and run from there
 
