@@ -8,18 +8,20 @@
 
 using namespace std;
 
-void find(string serial);
+void find(string val);
 
 int main(){
-	string serial;
-	cout << "Input Serial Number to Search For: " << endl;
-	cin >> serial;
-	find(serial);
+	string nameNum;
+	cout << "Input name/number to search for: " << endl;
+	cin >> nameNum;
+	find(nameNum);
 	return 0;
 }
 
-void find(string serial){
+void find(string val){
 	string path = ".";
+	// change rowNum to whatever your desired row is
+	int rowNum = 1234;
 	vector<string> instances;
 	try {
 		for(const auto& entry : filesystem::directory_iterator(path)){
@@ -32,14 +34,14 @@ void find(string serial){
 				int row = 0;
 				while(getline(file,line)){
 					row++;
-					if(row < 11) continue;
+					if(row < rowNum) continue;
 					istringstream ss(line);
 					string field;
 					int col = 0;
 					while(getline(ss,field,',')){
 						col++;
 						if(col==6){
-							if(field == serial){
+							if(field == val){
 								instances.push_back(entry.path().string());
 							}
 							break;
@@ -50,13 +52,13 @@ void find(string serial){
 		}
 		if(instances.size() > 0){
 			cout << endl;
-			cout << "Serial Number found in " << instances.size() << " Surplus sheet(s): " << endl;
+			cout << "Found in " << instances.size() << " sheet(s): " << endl;
 			for(int i = 0; i < instances.size(); i++){
 				cout << instances[i] << endl;
 			}
 		} else {
 			cout << endl;
-			cout << "Serial Number not found in Surplus sheets." << endl;
+			cout << "Not found in sheets." << endl;
 		}
 	} catch (const filesystem::filesystem_error& e){
 		cout << endl;
