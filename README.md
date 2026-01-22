@@ -1,4 +1,4 @@
-This program was created as a tool for IT to check interdepartmental excel sheets to maintain unique entries but can easily be repurposed and is not specific to current implementation
+This program was created as a tool for IT to check intradepartmental excel sheets to maintain unique entries but can easily be repurposed and is not specific to current implementation
 
 In this repo is an c++ program that searches through excel sheets based on row parameter, finds duplicates, and gives you both the amount of duplicates and which sheets they appear in, if any
 
